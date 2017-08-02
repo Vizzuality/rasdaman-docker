@@ -1,0 +1,11 @@
+host=localhost
+rasport=7001
+pgport=5432
+rasdbname=RASBASE
+petadbname=petascopedb
+rasuser=rasdaman
+raspassword=rasdaman
+petauser=rasdaman
+petapassword=rasdaman
+rasloginuser=rasadmin
+rasloginpassword=rasadmin
