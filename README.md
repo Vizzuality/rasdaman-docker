@@ -1,3 +1,0 @@
-# For now...
-
-docker run -td -p 7001:7001 0fd287ae63c3
