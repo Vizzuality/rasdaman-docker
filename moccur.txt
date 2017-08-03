@@ -1,0 +1,569 @@
+-*- mode: helm-moccur -*-
+
+Moccur Results for `[0-9]*\ ':
+
+install.log:1:write{
+install.log:2:    "1 INFO": "Strategy building is handled by the Package Installer Strategy Builder.", 
+install.log:3:    "2 INFO": "RasdamanDemoDataFinalizer /opt/rasdaman/", 
+install.log:4:    "3 TITLE": "Review the installation settings:", 
+install.log:5:    "4 INFO": "
+install.log:6:Installation path: /opt/rasdaman/
+install.log:7:Version: master
+install.log:8:Update: False
+install.log:9:User: rasdaman
+install.log:10:Debug: False
+install.log:11:Communication protocol: rasnet
+install.log:12:Database type: sqlite
+install.log:13:  Database data directory: /var/lib/rasdaman/data/
+install.log:14:Rasdaman binary: None
+install.log:15:Petascope enabled: True
+install.log:16:  Petascope database url: jdbc:postgresql://localhost:5432/petascopedb
+install.log:17:  Petascope database user: rasdaman
+install.log:18:  Petascope server type: tomcat
+install.log:19:  Tomcat home: /var/lib/tomcat7
+install.log:20:Secore enabled: True
+install.log:21:Run systemtest: False
+install.log:22:Rasdaman demo data: True
+install.log:23:Petascope demo data: True
+install.log:24:", 
+install.log:25:    "5 TITLE": "Validating system...", 
+install.log:26:    "6 TITLE": "System was validated.", 
+install.log:27:    "7 TITLE": "Installing third party dependencies on debian 8.8...", 
+install.log:28:    "8 INFO": "Checking user rasdaman....", 
+install.log:29:    "9 ['id', '-u', u'rasdaman']": {
+install.log:30:        "code": 1, 
+install.log:31:        "err": "id: rasdaman: no existe ese usuario
+install.log:32:", 
+install.log:33:        "execution_time": 0.0038480758666992188, 
+install.log:34:        "start_time": "2017-08-03 19:46:42", 
+install.log:35:        "user": "root", 
+install.log:36:        "out": ""
+install.log:37:    }, 
+install.log:38:    "10 INFO": "rasdaman user does not exist. Creating...", 
+install.log:39:    "11 ['useradd', '-r', '-d', u'/opt/rasdaman/', u'rasdaman']": {
+install.log:40:        "code": 0, 
+install.log:41:        "err": "", 
+install.log:42:        "execution_time": 0.03924202919006348, 
+install.log:43:        "start_time": "2017-08-03 19:46:42", 
+install.log:44:        "user": "root", 
+install.log:45:        "out": ""
+install.log:46:    }, 
+install.log:47:    "12 INFO": "User 'rasdaman' created successfully.", 
+install.log:48:    "13 INFO": "User rasdaman checked successfully.", 
+install.log:49:    "14 INFO": "Installing pip packages ['glob2', 'netcdf']... ", 
+install.log:50:    "15 ['pip', 'install', '--upgrade', 'pip']": {
+install.log:51:        "code": 0, 
+install.log:52:        "err": "", 
+install.log:53:        "execution_time": 1.4190540313720703, 
+install.log:54:        "start_time": "2017-08-03 19:46:42", 
+install.log:55:        "user": "root", 
+install.log:56:        "out": "Downloading/unpacking pip from https://pypi.python.org/packages/b6/ac/7015eb97dc749283ffdec1c3a88ddb8ae03b8fad0f0e611408f196358da3/pip-9.0.1-py2.py3-none-any.whl#md5=297dbd16ef53bcef0447d245815f5144
+install.log:57:Installing collected packages: pip
+install.log:58:  Found existing installation: pip 1.5.6
+install.log:59:    Not uninstalling pip at /usr/lib/python2.7/dist-packages, owned by OS
+install.log:60:Successfully installed pip
+install.log:61:Cleaning up...
+install.log:62:"
+install.log:63:    }, 
+install.log:64:    "16 ['pip', 'install', 'glob2', 'netcdf']": {
+install.log:65:        "code": 0, 
+install.log:66:        "err": "    DEPRECATION: Uninstalling a distutils installed project (numpy) has been deprecated and will be removed in a future version. This is due to the fact that uninstalling a distutils project will only partially uninstall the project.
+install.log:67:", 
+install.log:68:        "execution_time": 535.5430951118469, 
+install.log:69:        "start_time": "2017-08-03 19:46:44", 
+install.log:70:        "user": "root", 
+install.log:71:        "out": "Collecting glob2
+install.log:72:  Downloading glob2-0.5-py2.py3-none-any.whl
+install.log:73:Collecting netcdf
+install.log:74:  Downloading netcdf-0.2.1.tar.gz (16.5MB)
+install.log:75:Collecting numpy==1.8.0 (from netcdf)
+install.log:76:  Downloading numpy-1.8.0-cp27-cp27mu-manylinux1_x86_64.whl (14.5MB)
+install.log:77:Collecting h5py==2.3.1 (from netcdf)
+install.log:78:  Downloading h5py-2.3.1.tar.gz (1.1MB)
+install.log:79:Collecting netCDF4==1.1.0 (from netcdf)
+install.log:80:  Downloading netCDF4-1.1.0.tar.gz (562kB)
+install.log:81:Collecting mglob==0.4 (from netcdf)
+install.log:82:  Downloading mglob-0.4.zip
+install.log:83:Building wheels for collected packages: netcdf, h5py, netCDF4, mglob
+install.log:84:  Running setup.py bdist_wheel for netcdf: started
+install.log:85:  Running setup.py bdist_wheel for netcdf: finished with status 'done'
+install.log:86:  Stored in directory: /root/.cache/pip/wheels/18/12/b6/f9f119627c781bb0026109a88d422bd17e9b3ddd8d87d4cf50
+install.log:87:  Running setup.py bdist_wheel for h5py: started
+install.log:88:  Running setup.py bdist_wheel for h5py: finished with status 'done'
+install.log:89:  Stored in directory: /root/.cache/pip/wheels/e1/f1/30/217e6c4c867d9d4295c02c5a2afb245d0ffa709d20ba8ad040
+install.log:90:  Running setup.py bdist_wheel for netCDF4: started
+install.log:91:  Running setup.py bdist_wheel for netCDF4: finished with status 'done'
+install.log:92:  Stored in directory: /root/.cache/pip/wheels/b5/57/77/641f131ddc96ce45a3a65b8ed53ab802b768e2f938f2bd3826
+install.log:93:  Running setup.py bdist_wheel for mglob: started
+install.log:94:  Running setup.py bdist_wheel for mglob: finished with status 'done'
+install.log:95:  Stored in directory: /root/.cache/pip/wheels/8a/fa/b9/70892da734abf878e4c85cb54f62508d853b25b821d1f3cd48
+install.log:96:Successfully built netcdf h5py netCDF4 mglob
+install.log:97:Installing collected packages: glob2, numpy, h5py, netCDF4, mglob, netcdf
+install.log:98:  Found existing installation: numpy 1.8.2
+install.log:99:    Uninstalling numpy-1.8.2:
+install.log:100:      Successfully uninstalled numpy-1.8.2
+install.log:101:Successfully installed glob2-0.5 h5py-2.3.1 mglob-0.4 netCDF4-1.1.0 netcdf-0.2.1 numpy-1.8.0
+install.log:102:"
+install.log:103:    }, 
+install.log:104:    "17 INFO": "Pip packages installed successfully.", 
+install.log:105:    "18 INFO": "Creating directory structure...", 
+install.log:106:    "19 ['mkdir', '-p', u'/opt/rasdaman/']": {
+install.log:107:        "code": 0, 
+install.log:108:        "err": "", 
+install.log:109:        "execution_time": 0.002398967742919922, 
+install.log:110:        "start_time": "2017-08-03 19:55:39", 
+install.log:111:        "user": "root", 
+install.log:112:        "out": ""
+install.log:113:    }, 
+install.log:114:    "20 ['chown', '-R', u'rasdaman:', u'/opt/rasdaman/']": {
+install.log:115:        "code": 0, 
+install.log:116:        "err": "", 
+install.log:117:        "execution_time": 0.055574893951416016, 
+install.log:118:        "start_time": "2017-08-03 19:55:39", 
+install.log:119:        "user": "root", 
+install.log:120:        "out": ""
+install.log:121:    }, 
+install.log:122:    "21 ['chmod', '+x', u'/opt/rasdaman']": {
+install.log:123:        "code": 0, 
+install.log:124:        "err": "", 
+install.log:125:        "execution_time": 0.00215911865234375, 
+install.log:126:        "start_time": "2017-08-03 19:55:39", 
+install.log:127:        "user": "root", 
+install.log:128:        "out": ""
+install.log:129:    }, 
+install.log:130:    "22 ['chmod', '+x', u'/opt']": {
+install.log:131:        "code": 0, 
+install.log:132:        "err": "", 
+install.log:133:        "execution_time": 0.0020999908447265625, 
+install.log:134:        "start_time": "2017-08-03 19:55:39", 
+install.log:135:        "user": "root", 
+install.log:136:        "out": ""
+install.log:137:    }, 
+install.log:138:    "23 ['chmod', '+x', u'/']": {
+install.log:139:        "code": 0, 
+install.log:140:        "err": "", 
+install.log:141:        "execution_time": 0.0020339488983154297, 
+install.log:142:        "start_time": "2017-08-03 19:55:39", 
+install.log:143:        "user": "root", 
+install.log:144:        "out": ""
+install.log:145:    }, 
+install.log:146:    "24 ['mkdir', '-p', u'/opt/rasdaman//third_party/']": {
+install.log:147:        "code": 0, 
+install.log:148:        "err": "", 
+install.log:149:        "execution_time": 0.002258777618408203, 
+install.log:150:        "start_time": "2017-08-03 19:55:39", 
+install.log:151:        "user": "rasdaman", 
+install.log:152:        "out": ""
+install.log:153:    }, 
+install.log:154:    "25 INFO": "Directory structure created successfully.", 
+install.log:155:    "26 INFO": "Setting up the PATH environment variable in '/etc/profile.d/rasdaman.sh'...", 
+install.log:156:    "27 ['chmod', '-R', '+x', '/etc/profile.d/rasdaman.sh']": {
+install.log:157:        "code": 0, 
+install.log:158:        "err": "", 
+install.log:159:        "execution_time": 0.002074003219604492, 
+install.log:160:        "start_time": "2017-08-03 19:55:39", 
+install.log:161:        "user": "root", 
+install.log:162:        "out": ""
+install.log:163:    }, 
+install.log:164:    "28 INFO": "The PATH environment variable was set up successfully.", 
+install.log:165:    "29 INFO": "Increasing tomcat memory limit to 2GB...", 
+install.log:166:    "30 ['cp', '-a', '/etc/default/tomcat7', '/etc/default/tomcat7.2017-08-03_19-55-39.bak']": {
+install.log:167:        "code": 0, 
+install.log:168:        "err": "", 
+install.log:169:        "execution_time": 0.0025739669799804688, 
+install.log:170:        "start_time": "2017-08-03 19:55:39", 
+install.log:171:        "user": "root", 
+install.log:172:        "out": ""
+install.log:173:    }, 
+install.log:174:    "31 INFO": "Existing configuration saved at '/etc/default/tomcat7.2017-08-03_19-55-39.bak'", 
+install.log:175:    "32 ['systemctl', 'restart', 'tomcat7.service']": {
+install.log:176:        "code": 0, 
+install.log:177:        "err": "", 
+install.log:178:        "execution_time": 5.127524137496948, 
+install.log:179:        "start_time": "2017-08-03 19:55:39", 
+install.log:180:        "user": "root", 
+install.log:181:        "out": ""
+install.log:182:    }, 
+install.log:183:    "33 INFO": "Tomcat memory increased succesfully.", 
+install.log:184:    "34 ['ldconfig']": {
+install.log:185:        "code": 0, 
+install.log:186:        "err": "", 
+install.log:187:        "execution_time": 0.013421058654785156, 
+install.log:188:        "start_time": "2017-08-03 19:55:44", 
+install.log:189:        "user": "root", 
+install.log:190:        "out": ""
+install.log:191:    }, 
+install.log:192:    "35 TITLE": "Third party dependencies installed successfully.", 
+install.log:193:    "36 TITLE": "Retrieving rasdaman...", 
+install.log:194:    "37 TITLE": "Rasdaman retrieved successfully", 
+install.log:195:    "38 TITLE": "Building rasdaman...", 
+install.log:196:    "39 INFO": "Deploying def.war...", 
+install.log:197:    "40 ['mkdir', '-p', '/var/lib/tomcat7/webapps/secoredb']": {
+install.log:198:        "code": 0, 
+install.log:199:        "err": "", 
+install.log:200:        "execution_time": 0.0024809837341308594, 
+install.log:201:        "start_time": "2017-08-03 19:55:44", 
+install.log:202:        "user": "root", 
+install.log:203:        "out": ""
+install.log:204:    }, 
+install.log:205:    "41 ['chmod', '777', '/var/lib/tomcat7/webapps/secoredb']": {
+install.log:206:        "code": 0, 
+install.log:207:        "err": "", 
+install.log:208:        "execution_time": 0.002213001251220703, 
+install.log:209:        "start_time": "2017-08-03 19:55:44", 
+install.log:210:        "user": "root", 
+install.log:211:        "out": ""
+install.log:212:    }, 
+install.log:213:    "42 ['cp', u'/opt/rasdaman/share/rasdaman/war/def.war', '/var/lib/tomcat7/webapps']": {
+install.log:214:        "code": 0, 
+install.log:215:        "err": "", 
+install.log:216:        "execution_time": 0.01804208755493164, 
+install.log:217:        "start_time": "2017-08-03 19:55:44", 
+install.log:218:        "user": "root", 
+install.log:219:        "out": ""
+install.log:220:    }, 
+install.log:221:    "43 INFO": "def.war deployed successfully.", 
+install.log:222:    "44 INFO": "Deploying rasdaman.war...", 
+install.log:223:    "45 ['cp', u'/opt/rasdaman/share/rasdaman/war/rasdaman.war', '/var/lib/tomcat7/webapps']": {
+install.log:224:        "code": 0, 
+install.log:225:        "err": "", 
+install.log:226:        "execution_time": 0.06166696548461914, 
+install.log:227:        "start_time": "2017-08-03 19:56:04", 
+install.log:228:        "user": "root", 
+install.log:229:        "out": ""
+install.log:230:    }, 
+install.log:231:    "46 INFO": "rasdaman.war deployed successfully.", 
+install.log:232:    "47 TITLE": "Rasdaman was built successfully.", 
+install.log:233:    "48 TITLE": "Preparing rasdaman...", 
+install.log:234:    "49 INFO": "Preparing rasmgr.conf...", 
+install.log:235:    "50 INFO": "rasmgr.conf prepared successfully.", 
+install.log:236:    "51 INFO": "Preparing Rasdaman SQLite database...", 
+install.log:237:    "52 ['mkdir', '-p', u'/var/lib/rasdaman/data/']": {
+install.log:238:        "code": 0, 
+install.log:239:        "err": "", 
+install.log:240:        "execution_time": 0.002340078353881836, 
+install.log:241:        "start_time": "2017-08-03 19:56:24", 
+install.log:242:        "user": "root", 
+install.log:243:        "out": ""
+install.log:244:    }, 
+install.log:245:    "53 ['chown', '-R', u'rasdaman:', u'/var/lib/rasdaman/data/']": {
+install.log:246:        "code": 0, 
+install.log:247:        "err": "", 
+install.log:248:        "execution_time": 0.0023469924926757812, 
+install.log:249:        "start_time": "2017-08-03 19:56:24", 
+install.log:250:        "user": "root", 
+install.log:251:        "out": ""
+install.log:252:    }, 
+install.log:253:    "54 [u'/opt/rasdaman//bin/create_db.sh']": {
+install.log:254:        "code": 0, 
+install.log:255:        "err": "", 
+install.log:256:        "execution_time": 0.2842140197753906, 
+install.log:257:        "start_time": "2017-08-03 19:56:24", 
+install.log:258:        "user": "rasdaman", 
+install.log:259:        "out": "create_db.sh: Creating database, rasdaman v9.4 on base DBMS sqlite
+install.log:260:create_db.sh: rasdaman dictionary initialization... 
+install.log:261:create_db.sh: Filestorage directory '/opt/rasdaman/data' not found, creating... ok.
+install.log:262:rasdl: rasdaman schema and database manipulation tool, rasdaman 9.4.0 on base DBMS sqlite.
+install.log:263:Creating base RASBASE... [INFO] - Connected successfully to '/opt/rasdaman/data//RASBASE'
+install.log:264: [INFO] - initialized blob file storage handler with root data directory /opt/rasdaman/data//TILES/
+install.log:265: [INFO] - Connected successfully to '/opt/rasdaman/data//RASBASE'
+install.log:266:ok
+install.log:267:/opt/rasdaman/bin/rasdl done.
+install.log:268:rasdl: rasdaman schema and database manipulation tool, rasdaman 9.4.0 on base DBMS sqlite.
+install.log:269: [INFO] - Connected successfully to '/opt/rasdaman/data//RASBASE'
+install.log:270: [INFO] - initialized blob file storage handler with root data directory /opt/rasdaman/data//TILES/
+install.log:271: [INFO] - Connected successfully to '/opt/rasdaman/data//RASBASE'
+install.log:272:Reading rasdaman data definition file /opt/rasdaman/share/rasdaman/examples/rasdl/basictypes.dl...inserting symbols into database...ok
+install.log:273:ok
+install.log:274:/opt/rasdaman/bin/rasdl done.
+install.log:275:create_db.sh: done.
+install.log:276:"
+install.log:277:    }, 
+install.log:278:    "55 [u'/opt/rasdaman//bin/update_db.sh']": {
+install.log:279:        "code": 0, 
+install.log:280:        "err": "", 
+install.log:281:        "execution_time": 0.016089916229248047, 
+install.log:282:        "start_time": "2017-08-03 19:56:25", 
+install.log:283:        "user": "rasdaman", 
+install.log:284:        "out": "update_db.sh: sqlite database to update: /opt/rasdaman/data//RASBASE
+install.log:285:update_db.sh: rasdaman data directory: /opt/rasdaman/data//
+install.log:286:update_db.sh: rasdaman data directory: /opt/rasdaman/data//
+install.log:287:
+install.log:288:update_db.sh: executing updates:
+install.log:289:update_db.sh: database already up-to-date, nothing to update.
+install.log:290:
+install.log:291:update_db.sh: done, exiting.
+install.log:292:"
+install.log:293:    }, 
+install.log:294:    "56 INFO": "Rasdaman SQLite database was prepared.", 
+install.log:295:    "57 INFO": "Preparing petascope...", 
+install.log:296:    "58 ['psql', '-c', u\"SELECT 'rasdaman_user_exists_already' FROM pg_roles WHERE rolname='rasdaman'\"]": {
+install.log:297:        "code": 0, 
+install.log:298:        "err": "", 
+install.log:299:        "execution_time": 0.05303192138671875, 
+install.log:300:        "start_time": "2017-08-03 19:56:25", 
+install.log:301:        "user": "postgres", 
+install.log:302:        "out": " ?column? 
+install.log:303:----------
+install.log:304:(0 filas)
+install.log:305:
+install.log:307:    }, 
+install.log:308:    "59 ['createuser', '-s', u'rasdaman']": {
+install.log:309:        "code": 0, 
+install.log:310:        "err": "", 
+install.log:311:        "execution_time": 0.043868064880371094, 
+install.log:312:        "start_time": "2017-08-03 19:56:25", 
+install.log:313:        "user": "postgres", 
+install.log:314:        "out": ""
+install.log:315:    }, 
+install.log:316:    "60 ['psql', '-c', u'ALTER USER \"rasdaman\" WITH PASSWORD \\'7ab56c19ae434284898e45c37f4f7470\\'']": {
+install.log:317:        "code": 0, 
+install.log:318:        "err": "", 
+install.log:319:        "execution_time": 0.052484989166259766, 
+install.log:320:        "start_time": "2017-08-03 19:56:25", 
+install.log:321:        "user": "postgres", 
+install.log:322:        "out": "ALTER ROLE
+install.log:323:"
+install.log:324:    }, 
+install.log:325:    "61 [u'/opt/rasdaman//bin/update_petascopedb.sh']": {
+install.log:326:        "code": 0, 
+install.log:327:        "err": "", 
+install.log:328:        "execution_time": 3.4065561294555664, 
+install.log:329:        "start_time": "2017-08-03 19:56:25", 
+install.log:330:        "user": "rasdaman", 
+install.log:331:        "out": "update_petascopedb.sh: postgres settings read from /opt/rasdaman/etc///petascope.properties
+install.log:332:update_petascopedb.sh:   user: rasdaman
+install.log:333:update_petascopedb.sh:   port: 5432
+install.log:334:update_petascopedb.sh:   db: petascopedb
+install.log:335:update_petascopedb.sh: no petascope database found, creating... ok.
+install.log:336:update_petascopedb.sh: detected 18 updates in /opt/rasdaman/share/rasdaman//petascope... 
+install.log:337:update_petascopedb.sh: starting from update counter n.8
+install.log:338:update_petascopedb.sh:   update 8... 
+install.log:339:update8.sh: setting PostgreSQL search path to view tmp schema as well ...ok.
+install.log:340:update8.sh: updating utilities and global constants ... ok.
+install.log:341:update8.sh: updating triggers ... ok.
+install.log:342:update8.sh: creating WMS tables ... ok.
+install.log:343:update8.sh: creating schema for new PS_* tables ... ok.
+install.log:344:update8.sh: populating tables with some required metadata ... ok.
+install.log:345:update8.sh: no relations found in the public schema: nothing to migrate.
+install.log:346:update8.sh: updating macros ... ok.
+install.log:347:update8.sh: renaming new tables and database objects to have PS_ prefix ... ok.
+install.log:348:update8.sh: renaming constants to have PS_ prefix ... ok.
+install.log:349:update8.sh: fixing tables' name references ... ok.
+install.log:350:update8.sh: renaming tables references in inserted tuples... ok.
+install.log:351:update8.sh: backup pre-upgrade schema ... ok.
+install.log:352:update8.sh: no relations in the backup schema ps_pre_update8: drop it.
+install.log:353:update8.sh: dropping PostgreSQL schema 'ps_pre_update8'... ok.
+install.log:354:update8.sh: publishing upgraded metadata tables ... ok.
+install.log:355:update8.sh: resetting PostgreSQL search path to its default ... ok.
+install.log:356:update8.sh: done, exiting.
+install.log:357:ok.
+install.log:358:update_petascopedb.sh:   update 9... ok.
+install.log:359:update_petascopedb.sh:   update 10... ok.
+install.log:360:update_petascopedb.sh:   update 11... ok.
+install.log:361:update_petascopedb.sh:   update 12... ok.
+install.log:362:update_petascopedb.sh:   update 13... ok.
+install.log:363:update_petascopedb.sh:   update 14... ok.
+install.log:364:update_petascopedb.sh:   update 15... ok.
+install.log:365:update_petascopedb.sh:   update 16... ok.
+install.log:366:update_petascopedb.sh:   update 17... FAILED (return value 3).
+install.log:367:update_petascopedb.sh: updated database to update 16
+install.log:368:update_petascopedb.sh: database update was interrupted.
+install.log:369:
+install.log:370:update_petascopedb.sh: done, exiting.
+install.log:371:"
+install.log:372:    }, 
+install.log:373:    "62 INFO": "Petascope was prepared.", 
+install.log:374:    "63 TITLE": "Rasdaman prepared successfully.", 
+install.log:375:    "64 TITLE": "Finalizing installation...", 
+install.log:376:    "65 [u'/opt/rasdaman//bin/start_rasdaman.sh']": {
+install.log:377:        "code": -1, 
+install.log:378:        "err": "", 
+install.log:379:        "execution_time": 0.0021119117736816406, 
+install.log:380:        "start_time": "2017-08-03 19:56:28", 
+install.log:381:        "user": "rasdaman", 
+install.log:382:        "out": ""
+install.log:383:    }, 
+install.log:384:    "66 [u'/opt/rasdaman//bin/rasql', '--out', 'string', '-q', 'SELECT C FROM RAS_COLLECTIONNAMES AS C']": {
+install.log:385:        "code": 0, 
+install.log:386:        "err": "", 
+install.log:387:        "execution_time": 6.066036939620972, 
+install.log:388:        "start_time": "2017-08-03 19:56:28", 
+install.log:389:        "user": "rasdaman", 
+install.log:390:        "out": "/opt/rasdaman//bin/rasql: rasdaman query tool v1.0, rasdaman 9.4.0.
+install.log:391:opening database RASBASE at localhost:7001...ok
+install.log:392:Executing retrieval query...ok
+install.log:393:Query result collection has 0 element(s):
+install.log:394:/opt/rasdaman//bin/rasql done.
+install.log:395:"
+install.log:396:    }, 
+install.log:397:    "67 INFO": "Installing rasdaman demo data...", 
+install.log:398:    "68 [u'/opt/rasdaman//bin/rasdaman_insertdemo.sh', 'localhost', '7001', u'/opt/rasdaman//share/rasdaman/examples/images', 'rasadmin', 'rasadmin']": {
+install.log:399:        "code": 0, 
+install.log:400:        "err": "", 
+install.log:401:        "execution_time": 0.7124848365783691, 
+install.log:402:        "start_time": "2017-08-03 19:56:34", 
+install.log:403:        "user": "rasdaman", 
+install.log:404:        "out": "rasdaman_insertdemo.sh: rasdaman demo data insert script
+install.log:405:rasdaman_insertdemo.sh: using host localhost, image directory /opt/rasdaman//share/rasdaman/examples/images, and user/passwd rasadmin/rasadmin
+install.log:406:rasdaman_insertdemo.sh: ingesting mr... ok.
+install.log:407:rasdaman_insertdemo.sh: ingesting mr2... ok.
+install.log:408:rasdaman_insertdemo.sh: ingesting rgb... ok.
+install.log:409:rasdaman_insertdemo.sh: done.
+install.log:410:"
+install.log:411:    }, 
+install.log:412:    "69 [u'/opt/rasdaman//bin/stop_rasdaman.sh']": {
+install.log:413:        "code": -1, 
+install.log:414:        "err": "", 
+install.log:415:        "execution_time": 0.001764059066772461, 
+install.log:416:        "start_time": "2017-08-03 19:56:35", 
+install.log:417:        "user": "rasdaman", 
+install.log:418:        "out": ""
+install.log:419:    }, 
+install.log:420:    "70 INFO": "Rasdaman demo data installed successfully.", 
+install.log:421:    "71 [u'/opt/rasdaman//bin/start_rasdaman.sh']": {
+install.log:422:        "code": -1, 
+install.log:423:        "err": "", 
+install.log:424:        "execution_time": 0.001773834228515625, 
+install.log:425:        "start_time": "2017-08-03 19:56:36", 
+install.log:426:        "user": "rasdaman", 
+install.log:427:        "out": ""
+install.log:428:    }, 
+install.log:429:    "72 ['systemctl', 'restart', 'tomcat7.service']": {
+install.log:430:        "code": 0, 
+install.log:431:        "err": "", 
+install.log:432:        "execution_time": 5.474790096282959, 
+install.log:433:        "start_time": "2017-08-03 19:56:36", 
+install.log:434:        "user": "root", 
+install.log:435:        "out": ""
+install.log:436:    }, 
+install.log:437:    "73 [u'/opt/rasdaman//bin/rasql', '--out', 'string', '-q', 'SELECT C FROM RAS_COLLECTIONNAMES AS C']": {
+install.log:438:        "code": 0, 
+install.log:439:        "err": "", 
+install.log:440:        "execution_time": 1.8636159896850586, 
+install.log:441:        "start_time": "2017-08-03 19:56:42", 
+install.log:442:        "user": "rasdaman", 
+install.log:443:        "out": "/opt/rasdaman//bin/rasql: rasdaman query tool v1.0, rasdaman 9.4.0.
+install.log:444:opening database RASBASE at localhost:7001...ok
+install.log:445:Executing retrieval query...ok
+install.log:446:Query result collection has 3 element(s):
+install.log:447:  Result object 1: mr2\u0000
+install.log:448:  Result object 2: mr\u0000
+install.log:449:  Result object 3: rgb\u0000
+install.log:450:/opt/rasdaman//bin/rasql done.
+install.log:451:"
+install.log:452:    }, 
+install.log:453:    "74 INFO": "Installing Petascope demo data...", 
+install.log:454:    "75 ['wget', 'http://localhost:8080/def/crs/EPSG/0/4326', '-O', '/tmp/secore']": {
+install.log:455:        "code": 0, 
+install.log:456:        "err": "--2017-08-03 19:56:44--  http://localhost:8080/def/crs/EPSG/0/4326
+install.log:457:Resolviendo localhost (localhost)... ::1, 127.0.0.1
+install.log:458:Conectando con localhost (localhost)[::1]:8080... conectado.
+install.log:459:Petici\u00f3n HTTP enviada, esperando respuesta... 200 OK
+install.log:460:Longitud: no especificado [text/xml]
+install.log:461:Grabando a: \u201c/tmp/secore\u201d
+install.log:462:
+install.log:463:     0K .......... .                                            127M=0s
+install.log:464:
+install.log:465:2017-08-03 19:57:09 (127 MB/s) - \u201c/tmp/secore\u201d guardado [11789]
+install.log:466:
+install.log:467:", 
+install.log:468:        "execution_time": 25.328898906707764, 
+install.log:469:        "start_time": "2017-08-03 19:56:44", 
+install.log:470:        "user": "rasdaman", 
+install.log:471:        "out": ""
+install.log:472:    }, 
+install.log:473:    "76 ['wget', 'http://localhost:8080/rasdaman/ows?service=WCS&version=2.0.1&request=GetCapabilities', '-O', '/tmp/petascope']": {
+install.log:474:        "code": 0, 
+install.log:475:        "err": "--2017-08-03 19:57:09--  http://localhost:8080/rasdaman/ows?service=WCS&version=2.0.1&request=GetCapabilities
+install.log:476:Resolviendo localhost (localhost)... ::1, 127.0.0.1
+install.log:477:Conectando con localhost (localhost)[::1]:8080... conectado.
+install.log:478:Petici\u00f3n HTTP enviada, esperando respuesta... 200 OK
+install.log:479:Longitud: 6127 (6,0K) [text/xml]
+install.log:480:Grabando a: \u201c/tmp/petascope\u201d
+install.log:481:
+install.log:482:     0K .....                                                 100%  611M=0s
+install.log:483:
+install.log:484:2017-08-03 19:57:09 (611 MB/s) - \u201c/tmp/petascope\u201d guardado [6127/6127]
+install.log:485:
+install.log:486:", 
+install.log:487:        "execution_time": 0.10445594787597656, 
+install.log:488:        "start_time": "2017-08-03 19:57:09", 
+install.log:489:        "user": "rasdaman", 
+install.log:490:        "out": ""
+install.log:491:    }, 
+install.log:492:    "77 [u'/opt/rasdaman//bin/petascope_insertdemo.sh']": {
+install.log:493:        "code": -1, 
+install.log:494:        "err": "", 
+install.log:495:        "execution_time": 0.002135038375854492, 
+install.log:496:        "start_time": "2017-08-03 19:57:09", 
+install.log:497:        "user": "rasdaman", 
+install.log:498:        "out": ""
+install.log:499:    }, 
+install.log:500:    "78 INFO": "Petascope demo data installed successfully.", 
+install.log:501:    "79 INFO": "Creating service script...", 
+install.log:502:    "80 ['chmod', '-R', '755', '/etc/init.d/rasdaman']": {
+install.log:503:        "code": 0, 
+install.log:504:        "err": "", 
+install.log:505:        "execution_time": 0.0023550987243652344, 
+install.log:506:        "start_time": "2017-08-03 19:57:29", 
+install.log:507:        "user": "root", 
+install.log:508:        "out": ""
+install.log:509:    }, 
+install.log:510:    "81 ['chmod', '-R', '644', '/etc/systemd/system/rasdaman.service']": {
+install.log:511:        "code": 0, 
+install.log:512:        "err": "", 
+install.log:513:        "execution_time": 0.0021178722381591797, 
+install.log:514:        "start_time": "2017-08-03 19:57:29", 
+install.log:515:        "user": "root", 
+install.log:516:        "out": ""
+install.log:517:    }, 
+install.log:518:    "82 ['systemctl', 'enable', 'rasdaman.service']": {
+install.log:519:        "code": 0, 
+install.log:520:        "err": "Synchronizing state for rasdaman.service with sysvinit using update-rc.d...
+install.log:521:Executing /usr/sbin/update-rc.d rasdaman defaults
+install.log:522:Executing /usr/sbin/update-rc.d rasdaman enable
+install.log:523:", 
+install.log:524:        "execution_time": 0.23940110206604004, 
+install.log:525:        "start_time": "2017-08-03 19:57:29", 
+install.log:526:        "user": "root", 
+install.log:527:        "out": ""
+install.log:528:    }, 
+install.log:529:    "83 ['systemctl', 'daemon-reload']": {
+install.log:530:        "code": 0, 
+install.log:531:        "err": "", 
+install.log:532:        "execution_time": 0.04524803161621094, 
+install.log:533:        "start_time": "2017-08-03 19:57:29", 
+install.log:534:        "user": "root", 
+install.log:535:        "out": ""
+install.log:536:    }, 
+install.log:537:    "84 INFO": "Service script created successfully.", 
+install.log:538:    "85 INFO": "Configuring rasimport...", 
+install.log:539:    "86 INFO": "rasimport configured successfully.", 
+install.log:540:    "87 INFO": "Looking for any existing configuration files from deprecated packages to migrate...", 
+install.log:541:    "88 INFO": "No previous configuration files found to migrate.", 
+install.log:542:    "89 INFO": "Restoring configuration files...", 
+install.log:543:    "90 INFO": "No previous configuration files found to restore.", 
+install.log:544:    "91 ['chown', '-R', u'rasdaman:', u'/opt/rasdaman/']": {
+install.log:545:        "code": 0, 
+install.log:546:        "err": "", 
+install.log:547:        "execution_time": 0.03869009017944336, 
+install.log:548:        "start_time": "2017-08-03 19:57:29", 
+install.log:549:        "user": "root", 
+install.log:550:        "out": ""
+install.log:551:    }, 
+install.log:552:    "92 TITLE": "Installation finalized successfully.", 
+install.log:553:    "93 TITLE": "Testing rasdaman...", 
+install.log:554:    "94 INFO": "STATUS: SUCCESS", 
+install.log:555:    "95 TITLE": "Rasdaman was tested successfully.", 
+install.log:556:    "96 INFO": "No packaging requested.", 
+install.log:557:    "97 SUCCESS": "Rasdaman installed and configured successfully.", 
+install.log:558:    "98 TITLE": "Next steps", 
+install.log:559:    "99 INFO": " * Make sure that rasql is on the PATH first:
+install.log:560:   $ source /etc/profile.d/rasdaman.sh", 
+install.log:561:    "100 INFO": " * Then try some rasql queries using the rasql CLI, e.g:
+install.log:562:   $ rasql -q 'select encode( mr, \"png\" ) from mr' --out file", 
+install.log:563:    "101 INFO": " * Try the WCS client in your browser at http://localhost:8080/rasdaman/ows
+install.log:564:
+install.log:565:More information can be found at http://rasdaman.org. Have fun!"
+install.log:566:}
