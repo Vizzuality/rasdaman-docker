@@ -12,6 +12,7 @@ ENV R_LIBS /home/rasdaman/R
 ENV RASDATA /opt/rasdaman/data
 ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
 ENV PATH $RMANHOME/bin:$PATH
+ENV container docker
 
 ENV LANG C.UTF-8
 RUN env
@@ -47,8 +48,6 @@ m4 \
 openjdk-8-jdk \
 maven \
 ant \
-postgresql \
-postgresql-contrib \
 sqlite3 \
 zlib1g \
 gdal-bin \
@@ -73,12 +72,15 @@ ruby \
 ssh \
 r-base \
 r-base-dev \
-tomcat8
+tomcat8 \
+postgresql \
+postgresql-contrib
 
 COPY rasdaman_9.4.0-3_amd64.deb rasdaman.deb
-RUN dpkg -i rasdaman.deb
+RUN dpkg -i --force-all rasdaman.deb
 
-RUN useradd -r -d /opt/rasdaman rasdaman
+RUN useradd -r -d /opt/rasdaman rasdaman && \
+    echo "rasdaman:rasdaman" | chpasswd 
 
 RUN pip install --upgrade pip && \
     pip install setuptools
@@ -108,23 +110,14 @@ RUN cp /opt/rasdaman/share/rasdaman/war/rasdaman.war /var/lib/tomcat8/webapps/ra
 RUN mkdir -p /opt/rasdaman/data
 RUN chown -R rasdaman /opt/rasdaman/data/
 
-USER postgres
-RUN /etc/init.d/postgresql start
-
-RUN rm /etc/postgresql/9.5/main/pg_hba.conf
-RUN touch /etc/postgresql/9.5/main/pg_hba.conf
 RUN echo "local   all             postgres                                trust" >>  /etc/postgresql/9.5/main/pg_hba.conf
 RUN echo "local   all             all                                     trust" >> /etc/postgresql/9.5/main/pg_hba.conf
 RUN echo "host    all             all             127.0.0.1/32            md5" >> /etc/postgresql/9.5/main/pg_hba.conf
 RUN echo "host    all             all             ::1/128                 md5" >> /etc/postgresql/9.5/main/pg_hba.conf
 RUN echo "listen_addresses='*'" >> /etc/postgresql/9.5/main/postgresql.conf
-EXPOSE 5432
 
-RUN echo $(service postgresql status)
+RUN /etc/init.d/postgresql start \
+    && su - postgres -c"psql -c\"CREATE ROLE rasdaman SUPERUSER LOGIN CREATEROLE CREATEDB UNENCRYPTED PASSWORD 'rasdaman';\"" \
+    && su - rasdaman -c"$RMANHOME/bin/create_db.sh" && su - rasdaman -c"$RMANHOME/bin/update_petascopedb.sh"
 
-USER rasdaman
-RUN /opt/rasdaman/bin/create_db.sh
-# RUN createdb RASBASE
-# RUN /opt/rasdaman/bin/update_db.sh
-
-# RUN createuser -s rasdaman
+CMD ["/sbin/init"]
