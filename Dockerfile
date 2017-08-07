@@ -1,14 +1,11 @@
 FROM ubuntu:16.04
 MAINTAINER Enrique Cornejo <enrique.cornejo@vizzuality.com>
 
-# TODO:
-# - Set rasdaman log dir and tomcat log dir to shared folder
-
-ENV CATALINA_HOME /opt/tomcat6
-ENV WEBAPPS_HOME $CATALINA_HOME/webapps
+ENV CATALINA_HOME /usr/share/tomcat8
+ENV CATALINA_BASE /usr/share/tomcat8
 ENV RMANHOME /opt/rasdaman/
-ENV HOSTNAME rasdaman-dev1
-ENV R_LIBS /home/rasdaman/R
+ENV HOSTNAME rasdaman
+ENV R_LIBS /opt/rasdaman/R
 ENV RASDATA /opt/rasdaman/data
 ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
 ENV PATH $RMANHOME/bin:$PATH
@@ -19,105 +16,87 @@ RUN env
 
 # Install required software 
 RUN apt-get -qq update && apt-get install --no-install-recommends --fix-missing -y --force-yes \ 
-make \
-libtool \
-gawk \
-autoconf \
-bison \
-flex \
-git \
-g++ \
-unzip \
-libboost-all-dev \
-libtiff-dev \
-libgdal-dev \
-zlib1g-dev \
-libffi-dev \
-libnetcdf-cxx-legacy-dev \
-libedit-dev \
-libecpg-dev \
-libsqlite3-dev \
-libgrib-api-dev \
-libgrib2c-dev \
-curl \
-cmake \
-ccache \
-automake \
-autotools-dev \
-m4 \
-openjdk-8-jdk \
-maven \
-ant \
-sqlite3 \
-zlib1g \
-gdal-bin \
-python-dev \
-debianutils \
-python-dateutil \
-python-lxml \
-python-grib \
-python-pip \
-python-gdal \
-netcdf-bin \
-libnetcdf-c++4 \
-libecpg6 \
-libboost-all-dev \
-libedit-dev \
-python-netcdf4 \
-openjdk-8-jre \
-bc \
-vim-common \
-ruby-dev \
-ruby \
-ssh \
-r-base \
-r-base-dev \
-tomcat8 \
-postgresql \
-postgresql-contrib
+    make libtool gawk autoconf bison flex git g++ unzip libboost-all-dev libtiff-dev libgdal-dev zlib1g-dev libffi-dev libnetcdf-cxx-legacy-dev libedit-dev libecpg-dev libsqlite3-dev libgrib-api-dev libgrib2c-dev curl cmake ccache automake autotools-dev m4 openjdk-8-jdk maven ant sqlite3 zlib1g gdal-bin python-dev debianutils python-dateutil python-lxml python-grib python-pip python-gdal netcdf-bin libnetcdf-c++4 libecpg6 libboost-all-dev libedit-dev python-netcdf4 openjdk-8-jre bc vim-common ruby-dev ruby ssh r-base r-base-dev tomcat8 postgresql postgresql-contrib
 
+# APT repo currently does not work
 COPY rasdaman_9.4.0-3_amd64.deb rasdaman.deb
 RUN dpkg -i --force-all rasdaman.deb
 
-RUN useradd -r -d /opt/rasdaman rasdaman && \
-    echo "rasdaman:rasdaman" | chpasswd 
+# Adding user to run rasdaman
+RUN adduser --gecos "" --disabled-login --home /home/rasdaman rasdaman \
+   && echo  "rasdaman:rasdaman" | chpasswd
 
+# Installing pip packages
 RUN pip install --upgrade pip && \
     pip install setuptools
-
-RUN apt-get -qq update && apt-get install --no-install-recommends --fix-missing -y --force-yes \
-    libhdf5-dev libhdf5-serial-dev libnetcdf-dev python-netcdf4
-
-RUN ln -s /usr/include/hdf5/serial /usr/include/hdf5/include
 
 RUN pip install --upgrade pip && \
     pip install glob2
 
+# Netcdf4 support
+RUN apt-get -qq update && apt-get install --no-install-recommends --fix-missing -y --force-yes \
+    libhdf5-dev libhdf5-serial-dev libnetcdf-dev python-netcdf4
+
+# Tithe to the dark lords of code
+RUN ln -s /usr/include/hdf5/serial /usr/include/hdf5/include
+
+# Making dirs, chmodding...
 RUN mkdir -p /opt/rasdaman && \
     mkdir -p /opt/rasdaman/third_party
-
 RUN chmod +x /opt/rasdaman && \
     chmod +x /opt/ && \
     chmod +x /
 
+# Linking modules
 RUN ldconfig
 
-RUN mkdir -p /var/lib/tomcat8/webapps/secoredb
-RUN chmod 777 /var/lib/tomcat8/webapps/secoredb
-RUN cp /opt/rasdaman/share/rasdaman/war/def.war /var/lib/tomcat8/webapps/def.war
-RUN cp /opt/rasdaman/share/rasdaman/war/rasdaman.war /var/lib/tomcat8/webapps/rasdaman.war
+RUN mkdir -p $CATALINA_BASE/webapps/secoredb && chmod 777 $CATALINA_BASE/webapps/secoredb
+RUN cp /opt/rasdaman/share/rasdaman/war/def.war $CATALINA_BASE/webapps/def.war
+RUN cp /opt/rasdaman/share/rasdaman/war/rasdaman.war $CATALINA_BASE/webapps/rasdaman.war
 
 RUN mkdir -p /opt/rasdaman/data
 RUN chown -R rasdaman /opt/rasdaman/data/
 
-RUN echo "local   all             postgres                                trust" >>  /etc/postgresql/9.5/main/pg_hba.conf
-RUN echo "local   all             all                                     trust" >> /etc/postgresql/9.5/main/pg_hba.conf
-RUN echo "host    all             all             127.0.0.1/32            md5" >> /etc/postgresql/9.5/main/pg_hba.conf
-RUN echo "host    all             all             ::1/128                 md5" >> /etc/postgresql/9.5/main/pg_hba.conf
+RUN echo "local   all             all                                     peer" >> /etc/postgresql/9.5/main/pg_hba.conf
+RUN echo "host    all             all             127.0.0.1/32            trust" >> /etc/postgresql/9.5/main/pg_hba.conf
 RUN echo "listen_addresses='*'" >> /etc/postgresql/9.5/main/postgresql.conf
+
+USER rasdaman
+RUN touch ~/.pgpass
+RUN echo "localhost:*:*:rasdaman:rasdaman" > ~/.pgpass
+RUN chmod 600 ~/.pgpass
+
+
+USER root
+RUN chmod 644 /opt/rasdaman/share/rasdaman/petascope/update8.sh
+RUN chmod +x /opt/rasdaman/share/rasdaman/petascope/update8.sh
+RUN chmod 644 /opt/rasdaman/share/rasdaman/petascope/update8-sqlite.sh
+RUN chmod 644 /opt/rasdaman/share/rasdaman/petascope/update8/*
+RUN chmod 644 /opt/rasdaman/share/rasdaman/petascope/update8-hsqldb/*
+RUN chmod 644 /opt/rasdaman/share/rasdaman/petascope/update8-sqlite/*
+
+# Starting and updating DB
 
 RUN /etc/init.d/postgresql start \
     && su - postgres -c"psql -c\"CREATE ROLE rasdaman SUPERUSER LOGIN CREATEROLE CREATEDB UNENCRYPTED PASSWORD 'rasdaman';\"" \
     && su - rasdaman -c"$RMANHOME/bin/create_db.sh" && su - rasdaman -c"$RMANHOME/bin/update_petascopedb.sh"
 
-CMD ["/sbin/init"]
+# Ports
+
+EXPOSE 7001 8080 5432 8787
+
+# Installing supervisord
+
+RUN apt-get -qq update && apt-get install --no-install-recommends --fix-missing -y --force-yes \
+    supervisor
+
+COPY ./supervisord.conf /etc/supervisor/conf.d/
+# CMD ["/usr/bin/supervisord"]
+
+RUN chown -R rasdaman /opt/rasdaman/log
+
+USER tomcat8
+
+USER root
+
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
