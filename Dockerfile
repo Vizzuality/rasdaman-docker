@@ -3,9 +3,12 @@ MAINTAINER Enrique Cornejo <enrique.cornejo@vizzuality.com>
 
 ENV RMANHOME /opt/rasdaman/
 ENV RASDATA /opt/rasdaman/data
-ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
+ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/jre
 ENV PATH $RMANHOME/bin:$PATH
-ENV CATALINA_HOME /usr/share/tomcat8
+ENV CATALINA_HOME /opt/tomcat
+ENV CATALINA_BASE /opt/tomcat
+ENV CATALINA_OPTS -Xms512M -Xmx1024M -server -XX:+UseParallelGC
+ENV CATALINA_PID /opt/tomcat/temp/tomcat.pid
 ENV container docker
 
 ENV LANG C.UTF-8
@@ -68,12 +71,27 @@ RUN /etc/init.d/postgresql start \
     && su - rasdaman -c"$RMANHOME/bin/create_db.sh" && su - rasdaman -c"$RMANHOME/bin/update_petascopedb.sh"
 
 # Tomcat and petascope
-RUN mkdir -p $CATALINA_HOME-root/secoredb && chmod 777 $CATALINA_HOME-root/secoredb
-RUN cp /opt/rasdaman/share/rasdaman/war/def.war $CATALINA_HOME-root/def.war
-RUN cp /opt/rasdaman/share/rasdaman/war/rasdaman.war $CATALINA_HOME-root/rasdaman.war
 
-RUN mkdir $CATALINA_HOME/conf && mkdir  $CATALINA_HOME/tmp
-RUN mv /etc/tomcat8/server.xml $CATALINA_HOME/conf/
+#
+WORKDIR /tmp
+RUN curl -O http://apache.uvigo.es/tomcat/tomcat-8/v8.5.16/bin/apache-tomcat-8.5.16.tar.gz
+RUN mkdir /opt/tomcat
+RUN tar zxvf apache-tomcat-8.5.16.tar.gz -C /opt/tomcat --strip-components=1
+
+RUN groupadd tomcat
+RUN useradd -s /bin/false -g tomcat -d /opt/tomcat tomcat
+RUN chgrp -R tomcat /opt/tomcat && chmod -R g+r /opt/tomcat/conf && chmod g+x /opt/tomcat/conf
+WORKDIR /opt/tomcat
+RUN chown -R tomcat webapps work temp logs
+
+RUN mkdir -p $CATALINA_HOME/webapps/secoredb && chmod 777 $CATALINA_HOME/webapps/secoredb
+RUN cp /opt/rasdaman/share/rasdaman/war/def.war $CATALINA_HOME/webapps/def.war
+RUN cp /opt/rasdaman/share/rasdaman/war/rasdaman.war $CATALINA_HOME/webapps/rasdaman.war
+
+RUN mkdir  $CATALINA_HOME/tmp
+# RUN mv /etc/tomcat8/server.xml $CATALINA_HOME/conf/
+
+COPY petascope.properties /opt/rasdaman/etc/petascope.properties
 
 
 # Ports
@@ -86,8 +104,7 @@ RUN apt-get -qq update && apt-get install --no-install-recommends --fix-missing 
     supervisor
 
 COPY ./supervisord.conf /etc/supervisor/conf.d/
-# CMD ["/usr/bin/supervisord"]
-
 
 USER root
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+# CMD ["/sbin/init"]
