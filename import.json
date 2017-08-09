@@ -1,0 +1,23 @@
+{
+  "config": {
+    "service_url": "http://localhost:8080/rasdaman/ows",
+    "tmp_directory": "/tmp/",
+    "crs_resolver": "http://localhost:8080/def/",
+    "default_crs": "http://localhost:8080/def/crs/OGC/0/Index2D",
+    "mock": false,
+    "automated": true
+  },
+  "input": {
+    "coverage_id": "cea_test",
+    "paths": [
+	"/tmp/cea_test.tif"
+    ]
+  },
+  "recipe": {
+    "name": "map_mosaic",
+    "options": {
+      "tiling": "REGULAR [0:256, 0:102]",
+      "wms_import": true
+    }
+  }
+}

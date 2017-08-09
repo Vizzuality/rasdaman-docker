@@ -66,6 +66,9 @@ RUN chmod 644 /opt/rasdaman/share/rasdaman/petascope/update8-sqlite/*
 
 # Starting and updating DB
 
+COPY global_const.sql /opt/rasdaman/share/rasdaman/petascope/update8/global_const.sql
+COPY update14.sql /opt/rasdaman/share/rasdaman/petascope/update14.sql
+
 RUN /etc/init.d/postgresql start \
     && su - postgres -c"psql -c\"CREATE ROLE rasdaman SUPERUSER LOGIN CREATEROLE CREATEDB UNENCRYPTED PASSWORD 'rasdaman';\"" \
     && su - rasdaman -c"$RMANHOME/bin/create_db.sh" && su - rasdaman -c"$RMANHOME/bin/update_petascopedb.sh"
@@ -91,6 +94,7 @@ RUN cp /opt/rasdaman/share/rasdaman/war/rasdaman.war $CATALINA_HOME/webapps/rasd
 RUN mkdir  $CATALINA_HOME/tmp
 # RUN mv /etc/tomcat8/server.xml $CATALINA_HOME/conf/
 
+# Moving some config files to the container
 COPY petascope.properties /opt/rasdaman/etc/petascope.properties
 
 
@@ -104,6 +108,12 @@ RUN apt-get -qq update && apt-get install --no-install-recommends --fix-missing 
     supervisor
 
 COPY ./supervisord.conf /etc/supervisor/conf.d/
+
+
+COPY ./container_startup.sh /opt/
+RUN chmod +x /opt/container_startup.sh
+
+# Running services
 
 USER root
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
