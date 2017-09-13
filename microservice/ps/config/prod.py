@@ -1,0 +1,7 @@
+"""-"""
+
+SETTINGS = {
+    'logging': {
+        'level': 'INFO'
+    }
+}

@@ -1,0 +1,7 @@
+base:
+  build: .
+  ports:
+    - "5700:5700"
+  environment:
+    PORT: 5700
+  container_name: python-skeleton

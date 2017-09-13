@@ -1,0 +1,20 @@
+{
+    "swagger": "1.0",
+    "info": {
+        "title": "Python Skeleton",
+        "description": "Python Skeleton",
+        "version": "1.0.0"
+    },
+    "host": "staging-api.globalforestwatch.org",
+    "schemes": [
+        "https",
+        "http"
+    ],
+    "basePath": "/api/v1",
+    "produces": [
+        "application/vnd.api+json"
+    ],
+    "paths": {
+
+    }
+}

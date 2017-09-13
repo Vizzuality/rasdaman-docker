@@ -1,0 +1,13 @@
+prod:
+  image: vizzuality/python-skeleton:1.0.0${STAGING}
+  ports:
+    - "5700"
+  env_file:
+    - prod.env
+  command: start
+  dns: ${DNS_SERVER}
+  restart: always
+  log_driver: "syslog"
+  log_opt:
+      syslog-address: ${SYSLOG_ADDRESS}
+      tag: python-skeleton${STAGING}
