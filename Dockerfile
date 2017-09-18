@@ -13,8 +13,8 @@ ENV CATALINA_PID /opt/tomcat/temp/tomcat.pid
 ENV container docker
 ENV LANG C.UTF-8
 
-ENV NAME rasdaman
-ENV USER rasdaman
+ENV NAME importer
+ENV USER importer
 
 RUN env
 
@@ -95,14 +95,11 @@ RUN mkdir  $CATALINA_HOME/tmp
 COPY petascope.properties /opt/rasdaman/etc/petascope.properties
 
 # Exposing ports
-EXPOSE 7001 8080 5432 8787
+EXPOSE 7001 8080 5432 8787 5700
 
 # Installing supervisord
 RUN apt-get -qq update && apt-get install --no-install-recommends --fix-missing -y --force-yes \
     supervisor
-COPY ./supervisord.conf /etc/supervisor/conf.d/
-COPY ./container_startup.sh /opt/
-RUN chmod +x /opt/container_startup.sh
 
 # Copying microservice
 
@@ -123,9 +120,19 @@ COPY gunicorn.py /opt/$NAME/gunicorn.py
 # Copy the application folder inside the container
 WORKDIR /opt/$NAME
 
-COPY ./microservice/ /opt/$NAME/$NAME
-COPY ./microservice/microservice /opt/$NAME/microservice
+COPY ./$NAME/ /opt/$NAME/
+COPY ./$NAME/microservice /opt/$NAME/microservice
+
+RUN adduser --gecos "" --disabled-login --home /home/$USER importer \
+   && echo  "$USER:$USER" | chpasswd
+# RUN addgroup $USER && adduser -s /bin/bash -D -G $USER $USER
 RUN chown $USER:$USER /opt/$NAME
+
+#
+COPY ./supervisord.conf /etc/supervisor/conf.d/
+COPY ./container_startup.sh /opt/
+RUN chmod +x /opt/container_startup.sh
+
 
 # Running services
 USER root
