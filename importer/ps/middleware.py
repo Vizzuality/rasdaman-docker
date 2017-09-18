@@ -8,3 +8,11 @@ def set_something(func):
         kwargs["something"] = "something"
         return func(*args, **kwargs)
     return wrapper
+
+def set_url(func):
+    """Set something"""
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        kwargs["url"] = "url"
+        return func(*args, **kwargs)
+    return wrapper
