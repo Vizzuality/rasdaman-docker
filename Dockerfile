@@ -20,7 +20,7 @@ RUN env
 
 # Install required software 
 RUN apt-get -qq update && apt-get install --no-install-recommends --fix-missing -y --force-yes \ 
-    make libtool gawk autoconf bison flex git g++ unzip libboost-all-dev libtiff-dev libgdal-dev zlib1g-dev libffi-dev libnetcdf-cxx-legacy-dev libedit-dev libecpg-dev libsqlite3-dev libgrib-api-dev libgrib2c-dev curl cmake ccache automake autotools-dev m4 openjdk-8-jdk maven ant sqlite3 zlib1g gdal-bin python-dev debianutils python-dateutil python-lxml python-grib python-pip python-gdal netcdf-bin libnetcdf-c++4 libecpg6 libboost-all-dev libedit-dev python-netcdf4 openjdk-8-jre bc vim-common ruby-dev ruby ssh r-base r-base-dev tomcat8 postgresql postgresql-contrib
+    make libtool gawk autoconf bison flex git g++ unzip libboost-all-dev libtiff-dev libgdal-dev zlib1g-dev libffi-dev libnetcdf-cxx-legacy-dev libedit-dev libecpg-dev libsqlite3-dev libgrib-api-dev libgrib2c-dev curl cmake ccache automake autotools-dev m4 openjdk-8-jdk maven ant sqlite3 zlib1g gdal-bin python-dev debianutils python-dateutil python-lxml python-grib python-pip python-gdal netcdf-bin libnetcdf-c++4 libecpg6 libboost-all-dev libedit-dev python-netcdf4 openjdk-8-jre bc vim-common ruby-dev ruby ssh r-base r-base-dev tomcat8 postgresql postgresql-contrib supervisor python-meld3
 
 # APT repo doesn't work right now
 COPY rasdaman_9.4.0-3_amd64.deb rasdaman.deb
@@ -37,11 +37,25 @@ RUN pip install --upgrade pip && \
     pip install glob2
 
 # Netcdf4 support
-RUN apt-get -qq update && apt-get install --no-install-recommends --fix-missing -y --force-yes \
-    libhdf5-dev libhdf5-serial-dev libnetcdf-dev python-netcdf4
+# RUN apt-get -qq update && apt-get install --no-install-recommends -y --force-yes \
+#     libhdf5-serial-dev
+# RUN chmod 777 /var/lib/update-notifier/package-data-downloads/partial
+# RUN apt-get download libhdf5-serial-dev
+COPY libhdf5-serial-dev_1.10.0-patch1+docs-4_all.deb libhdf5-serial-dev_1.10.0-patch1+docs-4_all.deb
+RUN dpkg -i --force-all  libhdf5-serial-dev_1.10.0-patch1+docs-4_all.deb
+
+# RUN apt-get -qq update && apt-get install --no-install-recommends -y --force-yes \
+#      libgrib-api0
+
+COPY libgrib-api-dev_1.14.4-5_amd64.deb libgrib-api-dev_1.14.4-5_amd64.deb
+RUN dpkg -i --force-all libgrib-api-dev_1.14.4-5_amd64.deb
 
 # Tithe to the dark lords
+RUN ln -s /usr/lib/x86_64-linux-gnu/libnetcdf.so /usr/lib/x86_64-linux-gnu/libnetcdf.so.7
 RUN ln -s /usr/include/hdf5/serial /usr/include/hdf5/include
+RUN ln -s /usr/lib/libgrib_api.so.0 /usr/lib/libgrib_api-1.10.4.so
+RUN ln -s /usr/lib/x86_64-linux-gnu/libboost_system.so.1.58.0 /usr/lib/x86_64-linux-gnu/libboost_system.so.1.55.0
+RUN ln -s /usr/lib/x86_64-linux-gnu/libboost_thread.so.1.58.0 /usr/lib/x86_64-linux-gnu/libboost_thread.so.1.55.0
 
 # Linking modules
 RUN ldconfig
@@ -98,8 +112,9 @@ COPY petascope.properties /opt/rasdaman/etc/petascope.properties
 EXPOSE 7001 8080 5432 8787 5700
 
 # Installing supervisord
-RUN apt-get -qq update && apt-get install --no-install-recommends --fix-missing -y --force-yes \
-    supervisor
+
+# RUN apt-get -qq update && apt-get autoclean && apt-get install --no-install-recommends -y --force-yes \
+#     supervisor python-meld3
 
 # Copying microservice
 

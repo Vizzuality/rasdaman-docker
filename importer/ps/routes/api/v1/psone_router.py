@@ -37,8 +37,6 @@ def say_hello(something):
     return jsonify(data=[serialize_greeting(data)]), 200
 
 @psone_endpoints.route('/import', strict_slashes=False, methods=['POST'])
-@set_url
 def upload():
     """Uploads rasters to Rasdaman"""
     logging.info('[ROUTER] Importing rasters')
-    logging.info(f'[ROUTER] Importing {kwargs["url"]}')
