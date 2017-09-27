@@ -2,18 +2,18 @@
 
 import logging
 
-from flask import jsonify, Blueprint
+from flask import jsonify, Blueprint, request
 from importer.routes.api import error
 from importer.validators import validate_greeting
 from importer.middleware import set_something
 from importer.serializers import serialize_greeting
+from importer.helpers import RecipeHelper
 import json
 import CTRegisterMicroserviceFlask
 
-psone_endpoints = Blueprint('psone_endpoints', __name__)
+import_endpoints = Blueprint('import_endpoints', __name__)
 
-
-@psone_endpoints.route('/hello', strict_slashes=False, methods=['GET'])
+@import_endpoints.route('/hello', strict_slashes=False, methods=['GET'])
 @set_something
 @validate_greeting
 def say_hello(something):
@@ -36,7 +36,12 @@ def say_hello(something):
         return error(status=400, detail='Not valid')
     return jsonify(data=[serialize_greeting(data)]), 200
 
-@psone_endpoints.route('/import', strict_slashes=False, methods=['POST'])
+@import_endpoints.route('/import', strict_slashes=False, methods=['POST'])
 def upload():
     """Uploads rasters to Rasdaman"""
     logging.info('[ROUTER] Importing rasters')
+    logging.info("Request json data:")
+    logging.info(request.json)
+
+    
+    return "OK", 200

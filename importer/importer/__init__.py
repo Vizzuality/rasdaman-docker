@@ -7,7 +7,7 @@ import logging
 from flask import Flask
 from importer.config import SETTINGS
 from importer.routes.api import error
-from importer.routes.api.v1 import psone_endpoints
+from importer.routes.api.v1 import import_endpoints
 from importer.utils.files import load_config_json
 import CTRegisterMicroserviceFlask
 
@@ -21,7 +21,7 @@ logging.basicConfig(
 app = Flask(__name__)
 
 # Routing
-app.register_blueprint(psone_endpoints, url_prefix='/api/v1/psone')
+app.register_blueprint(import_endpoints, url_prefix='/api/v1/importer')
 
 # CT
 info = load_config_json('register')

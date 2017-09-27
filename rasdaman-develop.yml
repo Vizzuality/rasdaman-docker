@@ -13,3 +13,5 @@ services:
       ENVIRONMENT: staging
       PORT: 5700
       DEBUG: 'True'
+    volumes:
+    - ./importer:/opt/importer

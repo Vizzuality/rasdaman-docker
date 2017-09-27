@@ -27,7 +27,7 @@ class BasicTest(unittest.TestCase):
 
     def test_v1_hello(self):
         with HTTMock(response_content):
-            response = self.app.get('/api/v1/psone/hello', follow_redirects=True)
+            response = self.app.get('/api/v1/import/hello', follow_redirects=True)
         status_code = response.status_code
         data = self.deserialize(response)
         self.assertEqual(status_code, 200)
