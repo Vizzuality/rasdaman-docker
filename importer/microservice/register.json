@@ -2,14 +2,6 @@
     "name": "#(service.name)",
     "endpoints": [
         {
-            "path": "/v1/importer/hello",
-            "method": "GET",
-            "binary": true,
-            "redirect": {
-                "method": "GET",
-                "path": "/api/v1/importer/hello"
-            }
-        },{
             "path": "/v1/importer/import",
             "method": "POST",
             "redirect": {

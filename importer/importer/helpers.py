@@ -2,7 +2,6 @@
 class RecipeHelper(object):
     @staticmethod
     def generate_recipe(filelist, coverage_id, base_recipe = None):
-
         import_config = {
             "service_url": "http://localhost:8080/rasdaman/ows",
             "tmp_directory": "/tmp/",
@@ -20,7 +19,6 @@ class RecipeHelper(object):
                     "wms_import": true
                 }
             }
-
         
         final_recipe = {
             "config": import_config,

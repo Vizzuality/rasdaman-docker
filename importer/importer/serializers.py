@@ -1,6 +1,5 @@
 """Serializers"""
 
-
 def serialize_greeting(greeting):
     """."""
     return {

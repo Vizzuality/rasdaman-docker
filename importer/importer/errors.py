@@ -11,3 +11,6 @@ class Error(Exception):
         return {
             'message': self.message
         }
+
+class XMLParserError(Error):
+    pass
