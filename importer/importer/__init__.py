@@ -5,10 +5,10 @@ import json
 import logging
 
 from flask import Flask
-from ps.config import SETTINGS
-from ps.routes.api import error
-from ps.routes.api.v1 import psone_endpoints, pstwo_endpoints
-from ps.utils.files import load_config_json
+from importer.config import SETTINGS
+from importer.routes.api import error
+from importer.routes.api.v1 import psone_endpoints
+from importer.utils.files import load_config_json
 import CTRegisterMicroserviceFlask
 
 logging.basicConfig(
@@ -22,14 +22,13 @@ app = Flask(__name__)
 
 # Routing
 app.register_blueprint(psone_endpoints, url_prefix='/api/v1/psone')
-app.register_blueprint(pstwo_endpoints, url_prefix='/api/v1/pstwo')
 
 # CT
 info = load_config_json('register')
 swagger = load_config_json('swagger')
 CTRegisterMicroserviceFlask.register(
     app=app,
-    name='ps',
+    name='rasdaman_importer',
     info=info,
     swagger=swagger,
     mode=CTRegisterMicroserviceFlask.AUTOREGISTER_MODE if os.getenv('CT_REGISTER_MODE') and os.getenv('CT_REGISTER_MODE') == 'auto' else CTRegisterMicroserviceFlask.NORMAL_MODE,

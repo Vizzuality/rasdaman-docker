@@ -1,7 +1,7 @@
 """CONFIG MODULE"""
 
 import os
-from ps.config import base, staging, prod
+from importer.config import base, staging, prod
 
 SETTINGS = base.SETTINGS
 

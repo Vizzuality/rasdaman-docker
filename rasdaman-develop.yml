@@ -1,0 +1,15 @@
+version: "2"
+services:
+  rasdaman:
+    build: .
+    ports:
+      - 8080:8080
+      - 5700:5700
+    environment:
+      CT_REGISTER_MODE: auto
+      CT_URL: http://mymachine:9000
+      LOCAL_URL: http://mymachine:5700
+      CT_TOKEN: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Im1pY3Jvc2VydmljZSIsImNyZWF0ZWRBdCI6IjIwMTYtMDktMTQifQ.IRCIRm1nfIQTfda_Wb6Pg-341zhV8soAgzw7dd5HxxQ
+      ENVIRONMENT: staging
+      PORT: 5700
+      DEBUG: 'True'

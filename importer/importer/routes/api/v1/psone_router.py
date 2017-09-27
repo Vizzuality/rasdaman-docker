@@ -3,10 +3,10 @@
 import logging
 
 from flask import jsonify, Blueprint
-from ps.routes.api import error
-from ps.validators import validate_greeting
-from ps.middleware import set_something
-from ps.serializers import serialize_greeting
+from importer.routes.api import error
+from importer.validators import validate_greeting
+from importer.middleware import set_something
+from importer.serializers import serialize_greeting
 import json
 import CTRegisterMicroserviceFlask
 

@@ -1,6 +1,6 @@
 import unittest
 import json
-from ps import app
+from importer import app
 import requests
 from httmock import all_requests, response, HTTMock
 
@@ -33,10 +33,3 @@ class BasicTest(unittest.TestCase):
         self.assertEqual(status_code, 200)
         self.assertEqual(data[0].get('attributes').get('word'), 'hello')
         self.assertEqual(data[0].get('attributes').get('propertyThree'), 'any value')
-
-    def test_v2_hello(self):
-        response = self.app.get('/api/v1/pstwo/hello', follow_redirects=True)
-        status_code = response.status_code
-        data = self.deserialize(response)
-        self.assertEqual(status_code, 200)
-        self.assertEqual(data[0].get('attributes').get('word'), 'hello2')
