@@ -22,8 +22,11 @@ RUN env
 RUN apt-get -qq update && apt-get install --no-install-recommends --fix-missing -y --force-yes \ 
     make libtool gawk autoconf bison flex git g++ unzip libboost-all-dev libtiff-dev libgdal-dev zlib1g-dev libffi-dev libnetcdf-cxx-legacy-dev libedit-dev libecpg-dev libsqlite3-dev libgrib-api-dev libgrib2c-dev curl cmake ccache automake autotools-dev m4 openjdk-8-jdk maven ant sqlite3 zlib1g gdal-bin python-dev debianutils python-dateutil python-lxml python-grib python-pip python-gdal netcdf-bin libnetcdf-c++4 libecpg6 libboost-all-dev libedit-dev python-netcdf4 openjdk-8-jre bc vim-common ruby-dev ruby ssh r-base r-base-dev tomcat8 postgresql postgresql-contrib supervisor python-meld3
 
+RUN apt-get -qq update && apt-get install --no-install-recommends --fix-missing -y --force-yes \
+    libnetcdf-c++4
+
 # APT repo doesn't work right now
-COPY rasdaman_9.4.0-3_amd64.deb rasdaman.deb
+COPY rasdaman_9.4.2-1_amd64.deb rasdaman.deb
 RUN dpkg -i --force-all rasdaman.deb
 
 # Adding user to run rasdaman
