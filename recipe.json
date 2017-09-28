@@ -6,12 +6,12 @@
         "coverage_id": "test_rasdaman"
     },
     "config": {
-        "crs_resolver": "http://localhost:8080/def/",
-        "service_url": "http://localhost:8080/rasdaman/ows",
+        "crs_resolver": "http://rasdaman:8080/def/",
+        "service_url": "http://rasdaman:8080/rasdaman/ows",
         "tmp_directory": "/tmp/",
         "automated": true,
         "mock": false,
-        "default_crs": "http://localhost:8080/def/crs/OGC/0/Index2D"
+        "default_crs": "http://rasdaman:8080/def/crs/OGC/0/Index2D"
     },
     "recipe": {
         "name": "map_mosaic",

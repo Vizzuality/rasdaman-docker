@@ -4,6 +4,6 @@
 sleep 5
 echo -e "PostgreSQL started"
 
-su - rasdaman -c"/opt/rasdaman/bin/start_rasdaman.sh" >/dev/null
+su - rasdaman -c"/opt/rasdaman/bin/start_rasdaman.sh"
 sleep 5
 echo -e "Rasdaman started"
