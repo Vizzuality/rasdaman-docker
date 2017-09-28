@@ -23,6 +23,9 @@ def upload():
     logging.info(request.json)
     try:
         coverages_xml = RasdamanService.get_rasdaman_coverages()
+        coverages_dict = XMLService.get_coverages(coverages_xml)
+        logging.info('coverages_dict:')
+        logging.info(coverages_dict)
     except XMLParserError:
         return "NOT OK", 500
     except:
