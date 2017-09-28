@@ -1,7 +1,11 @@
 """Recipe helper"""
+
+import json
+import logging
+
 class RecipeHelper(object):
     @staticmethod
-    def generate_recipe(filelist, coverage_id, base_recipe = None):
+    def generate_recipe(filelist, coverage_id, recipe = None):
         import_config = {
             "service_url": "http://localhost:8080/rasdaman/ows",
             "tmp_directory": "/tmp/",
@@ -11,12 +15,11 @@ class RecipeHelper(object):
             "automated": True
         }
         
-        if not base_recipe:
-            base_recipe = {
+        if not recipe:
+            recipe = {
                 "name": "map_mosaic",
                 "options": {
-                    "tiling": "REGULAR [0:256, 0:102]",
-                    "wms_import": true
+                    "wms_import": True
                 }
             }
         
@@ -24,9 +27,22 @@ class RecipeHelper(object):
             "config": import_config,
             "input": {
                 "coverage_id": coverage_id,
-                "paths": [ filelist ]
+                "paths": filelist
             },
-            "recipe": base_recipe
+            "recipe": recipe
         }
+        logging.info('recipe: ')
+        logging.info(json.dumps(final_recipe))
+        return final_recipe
 
-        return json.dumps(final_recipe)
+    @staticmethod
+    def process_recipe(recipe):
+        filepaths = []
+        for path in recipe['input']['paths']:
+            None
+        recipe['input']['paths'] = filepaths
+        return recipe
+
+    @staticmethod
+    def ingest_recipe(recipe):
+        None

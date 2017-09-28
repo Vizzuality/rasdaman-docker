@@ -1,4 +1,4 @@
-version: "2"
+version: "2.1"
 services:
   rasdaman:
     build: .
@@ -17,3 +17,11 @@ services:
     - ./importer:/opt/importer
     extra_hosts:
     - "mymachine:192.168.1.42"
+    networks:
+      - ipvsix
+networks:
+  ipvsix:
+    enable_ipv6: true
+    ipam:
+      config:
+        - subnet: "2402:9400:1000:7::/64"

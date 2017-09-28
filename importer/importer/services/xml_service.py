@@ -3,6 +3,7 @@
 import logging
 import xml.etree.ElementTree as ET
 from importer.errors import XMLParserError
+from collections import OrderedDict
 import xmltodict
 
 class XMLService(object):
@@ -20,13 +21,9 @@ class XMLService(object):
     @staticmethod
     def extract_coverages(capabilities_mtd):
         coverages = []
-        for k, v in capabilities_mtd.iteritems():
-            if isinstance(v, OrderedDict):
-                extract_coverages(v)
-            else:
-                coverages.append(v)
+        try:
+            for v in capabilities_mtd['wcs:Capabilities']['Contents']['CoverageSummary']:
+                coverages.append(v['CoverageId'])
+        except KeyError:
+            return []
         return coverages
-        
-        
-
-# /wcs:Capabilities[@xsi:schemaLocation="http://www.opengis.net/wcs/2.0 http://schemas.opengis.net/wcs/2.0/wcsAll.xsd"]/Contents[@xmlns="http://www.opengis.net/wcs/2.0"]/CoverageSummary[6]/CoverageId/text()

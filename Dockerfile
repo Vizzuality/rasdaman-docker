@@ -66,7 +66,7 @@ RUN chown -R rasdaman /opt/rasdaman/data/
 RUN chown -R rasdaman /opt/rasdaman/log
 
 # Postgres config
-RUN echo "local   all             all                                     peer" >> /etc/postgresql/9.5/main/pg_hba.conf
+RUN echo "local   all             all                                     trust" >> /etc/postgresql/9.5/main/pg_hba.conf
 RUN echo "host    all             all             127.0.0.1/32            trust" >> /etc/postgresql/9.5/main/pg_hba.conf
 RUN echo "listen_addresses='*'" >> /etc/postgresql/9.5/main/postgresql.conf
 
