@@ -11,8 +11,6 @@ class XMLService(object):
     def get_coverages(xml):
         logging.info('[XMLService] Parsing XML capabilities')
         capabilities_dict = xmltodict.parse(xml)
-        logging.info('capabilities_dict:')
-        logging.info(capabilities_dict)
         coverages = XMLService.extract_coverages(capabilities_dict)
         return coverages
 
