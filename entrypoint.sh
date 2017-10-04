@@ -11,7 +11,7 @@ case "$1" in
         ;;
     start)
         echo "Running Start"
-        exec gunicorn -c gunicorn.py importer.wsgi:application
+        exec gunicorn -c gunicorn.py importer:application
         ;;
     worker)
         echo "Running celery"
