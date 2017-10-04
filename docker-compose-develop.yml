@@ -1,0 +1,38 @@
+develop:
+  extends:
+    file: base.yml
+    service: base
+  container_name: rasdaman-importer-develop
+  ports:
+    - "3000:3000"
+  environment:
+    ENVIRONMENT: dev
+    DEBUG: "True"
+    FLASK_APP: main.py
+  command: develop
+  restart: always
+  volumes:
+    - ./importer:/opt/rasdaman-importer/importer
+  links:
+    - redis
+
+# worker:
+#   extends:
+#     file: base.yml
+#     service: base
+#   container_name: rasdaman-importer-develop
+#   environment:
+#     ENVIRONMENT: dev
+#     DEBUG: "True"
+#     FLASK_APP: main.py
+#   command: worker
+#   restart: always
+#   links:
+#     - redis
+
+redis:
+    image: redis
+    container_name: rasdaman-importer-redis
+    ports:
+      - 6379
+    restart: always

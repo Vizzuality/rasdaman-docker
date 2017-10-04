@@ -3,9 +3,11 @@
 import json
 import logging
 
+
 class RecipeHelper(object):
+
     @staticmethod
-    def generate_recipe(filelist, coverage_id, recipe = None):
+    def generate_recipe(filelist, coverage_id, recipe=None):
         import_config = {
             "service_url": "http://localhost:8080/rasdaman/ows",
             "tmp_directory": "/tmp/",
@@ -14,7 +16,7 @@ class RecipeHelper(object):
             "mock": False,
             "automated": True
         }
-        
+
         if not recipe:
             recipe = {
                 "name": "map_mosaic",
@@ -22,7 +24,7 @@ class RecipeHelper(object):
                     "wms_import": True
                 }
             }
-        
+
         final_recipe = {
             "config": import_config,
             "input": {
@@ -38,11 +40,9 @@ class RecipeHelper(object):
     @staticmethod
     def process_recipe(recipe):
         filepaths = []
-        for path in recipe['input']['paths']:
-            None
         recipe['input']['paths'] = filepaths
         return recipe
 
     @staticmethod
-    def ingest_recipe(recipe):
-        None
+    def ingest_recipe():
+        pass

@@ -1,0 +1,30 @@
+prod:
+  extends:
+    file: base.yml
+    service: base
+  container_name: rasdaman-importer
+  ports:
+    - "3000:3000"
+  command: start
+  restart: always
+  links:
+    - redis
+
+worker:
+  extends:
+    file: base.yml
+    service: base
+  container_name: rasdaman-importer-worker
+  environment:
+    FLASK_APP: main.py
+  command: worker
+  restart: always
+  links:
+    - redis
+
+redis:
+    image: redis
+    container_name: rasdaman-importer-redis
+    ports:
+      - 6379
+    restart: always

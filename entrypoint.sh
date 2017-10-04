@@ -7,12 +7,15 @@ case "$1" in
         exec python main.py
         ;;
     test)
-        echo "Test"
-        exec python test.py
+        echo "Test (not yet)"
         ;;
     start)
         echo "Running Start"
-        exec gunicorn -c gunicorn.py importer:app
+        exec gunicorn -c gunicorn.py importer.wsgi:application
+        ;;
+    worker)
+        echo "Running celery"
+        exec celery -A importer.celery worker -E -B --loglevel=DEBUG
         ;;
     *)
         exec "$@"

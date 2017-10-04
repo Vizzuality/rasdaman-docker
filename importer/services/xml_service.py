@@ -1,10 +1,8 @@
 """XML SERVICE"""
 
 import logging
-import xml.etree.ElementTree as ET
-from importer.errors import XMLParserError
-from collections import OrderedDict
 import xmltodict
+
 
 class XMLService(object):
     """Extracts values from xml responses in Rasdaman"""

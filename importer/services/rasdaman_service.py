@@ -1,10 +1,11 @@
 """QUERY SERVICE"""
-import json
-import os
+
 import logging
 from requests import Request, Session
 
+
 class RasdamanService(object):
+
     @staticmethod
     def get_rasdaman_coverages():
         logging.info('[RasdamanService] Getting Rasdaman Coverages')
@@ -19,7 +20,7 @@ class RasdamanService(object):
             method='GET',
             url='http://localhost:8080/rasdaman/ows',
             headers=headers,
-            params = payload
+            params=payload
         )
 
         session = Session()

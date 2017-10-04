@@ -1,2 +1,4 @@
 *.deb
 *.pyc
+
+deploy.sh

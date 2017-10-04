@@ -1,0 +1,5 @@
+base:
+  build: .
+  environment:
+    PORT: 3000
+  container_name: rasdaman-importer
