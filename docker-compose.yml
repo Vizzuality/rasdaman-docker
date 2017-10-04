@@ -10,17 +10,17 @@ prod:
   links:
     - redis
 
-worker:
-  extends:
-    file: base.yml
-    service: base
-  container_name: rasdaman-importer-worker
-  environment:
-    FLASK_APP: main.py
-  command: worker
-  restart: always
-  links:
-    - redis
+# worker:
+#   extends:
+#     file: base.yml
+#     service: base
+#   container_name: rasdaman-importer-worker
+#   environment:
+#     FLASK_APP: main.py
+#   command: worker
+#   restart: always
+#   links:
+#     - redis
 
 redis:
     image: redis
