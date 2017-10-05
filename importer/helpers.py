@@ -43,13 +43,12 @@ class RecipeHelper(object):
         import_url = filepaths[0]
         tiffile = DownloadService.get_tiff_file(import_url)
         logging.debug(tiffile)
-        call(['ssh', 'ubuntu@54.146.170.2', 'sudo', 'chown', 'rasdaman:rasdaman', tiffile, '&&', 'sudo', 'chmod', '777', tiffile])
         recipe['input']['paths'] = [ tiffile ]
         return recipe
 
     @staticmethod
     def ingest_recipe(recipe):
-        with tempfile.NamedTemporaryFile(suffix='.json', mode='rw', delete=False) as temp:
+        with tempfile.NamedTemporaryFile(suffix='.json', mode='r', delete=False) as temp:
             #logging.debug(f"temp: {temp.name}")
             json.dump(recipe, temp)
             temp.flush()

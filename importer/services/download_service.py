@@ -23,4 +23,3 @@ class DownloadService(object):
             #logging.debug(f"[QueryService] Temporary raster filename: {raster_filename}")
             f.close()
             return raster_filename
-
