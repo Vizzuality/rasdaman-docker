@@ -39,11 +39,8 @@ class RecipeHelper(object):
     @staticmethod
     def process_recipe(recipe):
         filepaths = recipe['input']['paths']
-        logging.debug(f"filepaths: {filepaths}")
         # Only one file for now!
         import_url = filepaths[0]
-        logging.debug(import_url)
-
         tiffile = DownloadService.get_tiff_file(import_url)
         logging.debug(tiffile)
         recipe['input']['paths'] = [ tiffile ]
@@ -52,7 +49,7 @@ class RecipeHelper(object):
     @staticmethod
     def ingest_recipe(recipe):
         with tempfile.NamedTemporaryFile(suffix='.json', mode='w', delete=False) as temp:
-            logging.debug(f"temp: {temp.name}")
+            #logging.debug(f"temp: {temp.name}")
             json.dump(recipe, temp)
             temp.flush()
             call(["wcst_import.sh", temp.name])

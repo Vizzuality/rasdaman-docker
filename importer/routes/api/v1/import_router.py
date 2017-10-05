@@ -21,16 +21,16 @@ def upload():
     try:
         raster_url = request.get_json().get('connectorUrl', None)
         coverage_name = request.get_json().get('tableName', None)
-        logging.debug(f"raster_url: {raster_url}")
+        # logging.debug(f"raster_url: {raster_url}")
         coverages_xml = RasdamanService.get_rasdaman_coverages()
         coverages_list = XMLService.get_coverages(coverages_xml)
-        logging.debug(f"coverages_list: {coverages_list}")
+        # logging.debug(f"coverages_list: {coverages_list}")
         if coverage_name not in coverages_list:
             logging.debug("Generating recipe")
             recipe = RecipeHelper.generate_recipe(raster_url, coverage_name)
-            logging.debug(f"recipe: {recipe}")
+            #logging.debug(f"recipe: {recipe}")
             processed_recipe = RecipeHelper.process_recipe(recipe)
-            logging.debug(f"processed_recipe: {processed_recipe}")
+            #logging.debug(f"processed_recipe: {processed_recipe}")
             RecipeHelper.ingest_recipe(recipe)
             
         else:

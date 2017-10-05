@@ -20,7 +20,7 @@ class DownloadService(object):
             for chunk in response.iter_content(chunk_size=1024):
                 f.write(chunk)
             raster_filename = f.name
-            logging.debug(f"[QueryService] Temporary raster filename: {raster_filename}")
+            #logging.debug(f"[QueryService] Temporary raster filename: {raster_filename}")
             f.close()
             return raster_filename
 

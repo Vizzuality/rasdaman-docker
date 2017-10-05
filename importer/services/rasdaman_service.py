@@ -18,7 +18,7 @@ class RasdamanService(object):
 
         request = Request(
             method='GET',
-            url='http://54.146.170.2:8080/rasdaman/ows',
+            url='http://localhost:8080/rasdaman/ows',
             headers=headers,
             params=payload
         )

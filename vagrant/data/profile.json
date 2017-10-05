@@ -1,41 +1,47 @@
 {
-  "profile_name": "rasdaman_profile",
-  "build": {
-    "type": "source",
-    "repository": "git://rasdaman.org/rasdaman.git",
-    "version": "master"
-  },
-  "install_path": "/opt/rasdaman",
-  "user": "rasdaman",
-  "developer_friendly": true,
-  "unorthodox_changes": false,
-  "automated": true,
-  "debug": false,
-  "error_message_limit": 400,
-  "communication_protocol": "rasnet",
-  "database": {
-    "type": "sqlite"
-  },
-  "petascope": {
-    "enabled": true,
-    "type": "tomcat",
-    "server_conf": {
-      "port": 8080
+    "profile_name": "rasdaman_profile",
+    "build": {
+        "type": "source",
+        "repository": "git://rasdaman.org/rasdaman.git",
+        "version": "master"
     },
-    "databse_conf": {
-      "url": "rpetascopedb",
-      "user": "rpetauser",
-      "password": "rpetapasswd"
+    "install_path": "/opt/rasdaman",
+    "user": "rasdaman",
+    "developer_friendly": true,
+    "unorthodox_changes": false,
+    "automated": true,
+    "debug": false,
+    "error_message_limit": 400,
+    "communication_protocol": "rasnet",
+    "database": {
+        "type": "sqlite"
+    },
+    "petascope": {
+        "enabled": true,
+        "type": "tomcat",
+        "server_conf": {
+            "port": 8080
+        },
+        "databse_conf": {
+            "url": "rpetascopedb",
+            "user": "rpetauser",
+            "password": "rpetapasswd"
+        },
+	,
+        "database_conf": {
+            "url": "rpetascopedb",
+            "user": "rpetauser",
+            "password": "rpetapasswd"
+        }
+    },
+    "secore": {
+        "enabled": true
+    },
+    "demo": {
+        "rasdaman_data": true,
+        "petascope_data": true
+    },
+    "test": {
+        "systemtest": false
     }
-  },
-  "secore": {
-    "enabled": true
-  },
-  "demo": {
-    "rasdaman_data": true,
-    "petascope_data": true
-  },
-  "test": {
-    "systemtest": false
-  }
 }
