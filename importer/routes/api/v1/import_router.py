@@ -1,13 +1,12 @@
 """API ROUTER"""
 
 import logging
+import subprocess
 
 from flask import jsonify, Blueprint, request
-from importer.routes.api import error
 from importer.services.rasdaman_service import RasdamanService
 from importer.services.xml_service import XMLService
 from importer.helpers import RecipeHelper
-from importer.errors import XMLParserError
 
 import_endpoints = Blueprint('import_endpoints', __name__)
 
@@ -28,21 +27,21 @@ def upload():
         if coverage_name not in coverages_list:
             logging.debug("Generating recipe")
             recipe = RecipeHelper.generate_recipe(raster_url, coverage_name)
-            #logging.debug(f"recipe: {recipe}")
+            # logging.debug(f"recipe: {recipe}")
             processed_recipe = RecipeHelper.process_recipe(recipe)
-            #logging.debug(f"processed_recipe: {processed_recipe}")
+            # logging.debug(f"processed_recipe: {processed_recipe}")
             RecipeHelper.ingest_recipe(recipe)
-            
+
         else:
-            None
+            pass
             # coverage already existing - we should avoid overwriting for now
-            
+
     except Exception as e:
         logging.debug(e)
     finally:
         # Remember to clean up any files
-        None
-    
+        pass
+
     #
     #     if req_input['coverage_id'] not in coverages_list:
     #         recipe = RecipeHelper.generate_recipe(req_input['paths'], req_input['coverage_id'])
@@ -51,6 +50,7 @@ def upload():
     #
     # except XMLParserError:
     #     return "NOT OK", 500
+    subprocess.call(['ssh', 'ubuntu@54.146.170.2', 'pwd'])
     return jsonify(request.get_json()), 200
 
 

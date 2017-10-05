@@ -7,6 +7,8 @@ prod:
     - "3010:3010"
   command: start
   restart: always
+  volumes:
+    - /home/rasdaman-importer/.ssh:/root/.ssh
   links:
     - redis
 
