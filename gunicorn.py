@@ -18,8 +18,8 @@ spew = False
 daemon = False
 pidfile = None
 umask = 666
-user = os.getenv('USER')
-group = os.getenv('USER')
+user = 'root'
+group = 'root'
 tmp_upload_dir = None
 
 errorlog = '-'
