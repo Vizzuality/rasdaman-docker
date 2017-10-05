@@ -30,7 +30,7 @@ COPY ./importer /opt/$NAME/importer
 RUN chown $USER:$USER /opt/$NAME
 
 # Tell Docker we are going to use this ports
-EXPOSE 3000
+EXPOSE 3010
 USER root
 #USER $USER
 

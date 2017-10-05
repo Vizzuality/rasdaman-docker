@@ -4,7 +4,7 @@ prod:
     service: base
   container_name: rasdaman-importer
   ports:
-    - "3000:3000"
+    - "3010:3010"
   command: start
   restart: always
   links:
