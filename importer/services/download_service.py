@@ -16,7 +16,7 @@ class DownloadService(object):
         session = Session()
         prepped = session.prepare_request(request)
         response = session.send(prepped)
-        with tempfile.NamedTemporaryFile(suffix='.tiff', delete=False) as f:
+        with tempfile.NamedTemporaryFile(suffix='.tiff', mode='wb', delete=False) as f:
             for chunk in response.iter_content(chunk_size=1024):
                 f.write(chunk)
             raster_filename = f.name

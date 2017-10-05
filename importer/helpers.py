@@ -48,7 +48,7 @@ class RecipeHelper(object):
 
     @staticmethod
     def ingest_recipe(recipe):
-        with tempfile.NamedTemporaryFile(suffix='.json', mode='r', delete=False) as temp:
+        with tempfile.NamedTemporaryFile(suffix='.json', mode='w', delete=False) as temp:
             #logging.debug(f"temp: {temp.name}")
             json.dump(recipe, temp)
             temp.flush()
