@@ -6,6 +6,7 @@ from flask import jsonify, Blueprint, request
 from importer.services.rasdaman_service import RasdamanService
 from importer.services.xml_service import XMLService
 from importer.helpers import RecipeHelper
+from importer.routes.api import error
 
 import_endpoints = Blueprint('import_endpoints', __name__)
 
@@ -30,28 +31,13 @@ def upload():
             processed_recipe = RecipeHelper.process_recipe(recipe)
             # logging.debug(f"processed_recipe: {processed_recipe}")
             RecipeHelper.ingest_recipe(processed_recipe)
-
         else:
-            pass
-            # coverage already existing - we should avoid overwriting for now
-
+            return error(status=400, detail='coverage already exists')
     except Exception as e:
         logging.debug(e)
+        return error(status=500, detail='error creating dataset')
     finally:
         # Remember to clean up any files
         pass
 
-    #
-    #     if req_input['coverage_id'] not in coverages_list:
-    #         recipe = RecipeHelper.generate_recipe(req_input['paths'], req_input['coverage_id'])
-    #         logging.info('recipe:')
-    #         logging.info(recipe)
-    #
-    # except XMLParserError:
-    #     return "NOT OK", 500
     return jsonify(request.get_json()), 200
-
-
-@import_endpoints.route('/import', strict_slashes=False, methods=['GET'])
-def get():
-    return "OK", 200
