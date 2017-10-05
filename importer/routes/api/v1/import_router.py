@@ -1,7 +1,6 @@
 """API ROUTER"""
 
 import logging
-import subprocess
 
 from flask import jsonify, Blueprint, request
 from importer.services.rasdaman_service import RasdamanService
@@ -30,7 +29,7 @@ def upload():
             # logging.debug(f"recipe: {recipe}")
             processed_recipe = RecipeHelper.process_recipe(recipe)
             # logging.debug(f"processed_recipe: {processed_recipe}")
-            RecipeHelper.ingest_recipe(recipe)
+            RecipeHelper.ingest_recipe(processed_recipe)
 
         else:
             pass
@@ -50,7 +49,6 @@ def upload():
     #
     # except XMLParserError:
     #     return "NOT OK", 500
-    subprocess.call(['ssh', 'ubuntu@54.146.170.2', 'pwd'])
     return jsonify(request.get_json()), 200
 
 

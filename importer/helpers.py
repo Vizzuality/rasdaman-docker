@@ -10,10 +10,10 @@ class RecipeHelper(object):
     @staticmethod
     def generate_recipe(filelist, coverage_id, recipe=None):
         import_config = {
-            "service_url": "http://localhost:8080/rasdaman/ows",
+            "service_url": "http://54.146.170.2:8080/rasdaman/ows",
             "tmp_directory": "/tmp/",
-            "crs_resolver": "http://localhost:8080/def/",
-            "default_crs": "http://localhost:8080/def/crs/OGC/0/Index2D",
+            "crs_resolver": "http://54.146.170.2:8080/def/",
+            "default_crs": "http://54.146.170.2:8080/def/crs/OGC/0/Index2D",
             "mock": False,
             "automated": True
         }
@@ -52,5 +52,5 @@ class RecipeHelper(object):
             #logging.debug(f"temp: {temp.name}")
             json.dump(recipe, temp)
             temp.flush()
-            call(["wcst_import.sh", temp.name])
+            call(['ssh', 'ubuntu@54.146.170.2', 'bash', '/opt/rasdaman/bin/wcst_import.sh', temp.name])
             logging.debug("DONE")
