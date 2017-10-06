@@ -45,7 +45,7 @@ class RecipeHelper(object):
         # Only one file for now!
         import_url = filepaths[0]
         tiffile = DownloadService.get_tiff_file(import_url)
-        with open(tiffile, 'w') as f:
+        with open(tiffile, 'a+') as f:
             call(['ssh', 'ubuntu@'+rasdaman_ip, 'sudo', 'chown', 'rasdaman:rasdaman', f.name, '&&', 'sudo', 'chmod', '777', f.name])
         recipe['input']['paths'] = [tiffile]
         return recipe
